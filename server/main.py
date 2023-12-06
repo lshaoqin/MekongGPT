@@ -273,6 +273,8 @@ async def querygpt_main(
 
             async with httpx.AsyncClient() as client:
                 await client.post(url, headers=headers, json=data)
+            
+        db.store_reply(userqn, response["choices"][0]["message"]["content"])
 
         return QueryGPTResponse(result=response["choices"][0]["message"]["content"])
     except Exception as e:

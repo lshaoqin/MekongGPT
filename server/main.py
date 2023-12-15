@@ -222,6 +222,7 @@ async def querygpt_main(
         logger.info("Getting queries")
         queries = get_queries(userqn)
         logger.info("Getting queries done")
+        logger.info(queries)
         logger.info("Querying database")
         results = await datastore.query(
             queries

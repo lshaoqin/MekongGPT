@@ -69,10 +69,11 @@ def get_queries(user_question: str) -> List[str]:
     Generates queries for the vector database
     """
     try:
-        messages = [{
+        messages = [
+            {
             "role": "user",
             "content": apply_queries_prompt_template(user_question)
-        }]
+            }]
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-16k",
@@ -99,8 +100,22 @@ def call_chatgpt_api(user_question: str, chunks: List[str]) -> Dict[str, Any]:
             "role": "user",
             "content": chunk
         }, chunks))
-    question = apply_prompt_template(user_question)
+    question = user_question
     messages.append({"role": "user", "content": question})
+    messages.append(
+            {
+            "role": "system",
+            "content": f"""
+            Follow these seven instructions below in all your responses:
+            1. Use Vietnamese language only.
+            2. Do not use English language.
+            3. You are a Vietnamese agricultural expert, trying to explain things in simple terms to Vietnamese farmers.
+            4. You are designed to provide accurate information in Vietnamese to questions that are based on the input given.
+            5. If the information directly or indirectly exists in the input, the response must reflect that.
+            6. However, if the information does not exist in the input, you can provide your own information that is consistent with the input.
+            7. If the information does not exist in the input, you must tell me that your response may not be accurate.
+            """
+            })
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-16k",
         messages=messages,

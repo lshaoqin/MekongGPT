@@ -112,8 +112,8 @@ def call_chatgpt_api(user_question: str, chunks: List[str]) -> Dict[str, Any]:
             3. You are a Vietnamese agricultural expert, trying to explain things in simple terms to Vietnamese farmers.
             4. You are designed to provide accurate information in Vietnamese to questions that are based on the input given.
             5. If the information directly or indirectly exists in the input, the response must reflect that.
-            6. However, if the information does not exist in the input, you can provide your own information that is consistent with the input.
-            7. If the information does not exist in the input, you must tell me that your response may not be accurate.
+            6. However, if the information does not exist in the input, you can make up information that is consistent with the input.
+            7. If you make up information that does not exist in the input, you must tell me that your response may not be accurate.
             """
             })
     response = openai.ChatCompletion.create(

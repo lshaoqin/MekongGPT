@@ -6,11 +6,6 @@ authors = ["isafulf <isabella@openai.com>"]
 readme = "README.md"
 packages = [{include = "server"}]
 
-[[tool.poetry.source]]
-name = "azure-sdk-dev"
-url = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-python/pypi/simple/"
-priority = 'default'
-
 [tool.poetry.dependencies]
 python = "^3.10"
 fastapi = "^0.92.0"
